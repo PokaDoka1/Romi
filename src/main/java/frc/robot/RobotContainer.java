@@ -4,11 +4,13 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Forward;
 import frc.robot.commands.Turn;
+import frc.robot.commands.joystickDriving;
 import frc.robot.subsystems.RomiDrivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -24,10 +26,15 @@ public class RobotContainer {
   public static final RomiDrivetrain m_romiDriveTrain = new RomiDrivetrain();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDriveTrain);
+  private final joystickDriving m_joystickDriving = new joystickDriving(m_romiDriveTrain);
+
+  public static PS4Controller PS4joystick = new PS4Controller(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
+
+
     configureButtonBindings();
   }
 
@@ -41,7 +48,11 @@ public class RobotContainer {
     SmartDashboard.putData("forward", new Forward(6));
     SmartDashboard.putData("turn 90", new Turn(90));
     SmartDashboard.putData("turn -90", new Turn(-90));
-    
+
+    //when in teleop, the m_joystickDriving is gonna run
+    m_romiDriveTrain.setDefaultCommand(m_joystickDriving);
+
+
   }
 
   /**
