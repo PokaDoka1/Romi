@@ -32,7 +32,7 @@ public class RobotContainer {
   private final joystickDriving m_joystickDriving = new joystickDriving(m_romiDriveTrain);
   private final straightLine m_straightLine = new straightLine(m_romiDriveTrain);
 
-  public static PS4Controller PS4joystick = new PS4Controller(0);
+  public static final PS4Controller PS4joystick = new PS4Controller(0);
 
   
 
@@ -59,7 +59,7 @@ public class RobotContainer {
     //when in teleop, the m_joystickDriving is gonna run
     
     m_romiDriveTrain.setDefaultCommand(m_straightLine);
-    new JoystickButton(PS4joystick, PS4Controller.getSquareButton()).whenPressed(new joystickDriving(m_romiDriveTrain));
+    new JoystickButton(PS4joystick, 1).whenPressed(new joystickDriving(m_romiDriveTrain));
   
 
 
