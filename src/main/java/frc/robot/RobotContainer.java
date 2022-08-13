@@ -12,6 +12,7 @@ import frc.robot.commands.Forward;
 import frc.robot.commands.Turn;
 import frc.robot.commands.joystickDriving;
 import frc.robot.commands.straightLine;
+import frc.robot.sensor.RomiGyro;
 import frc.robot.subsystems.RomiDrivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -33,6 +34,7 @@ public class RobotContainer {
   private final straightLine m_straightLine = new straightLine(m_romiDriveTrain);
 
   public static PS4Controller PS4joystick = new PS4Controller(0);
+  
 
   
 
@@ -59,7 +61,7 @@ public class RobotContainer {
     //when in teleop, the m_joystickDriving is gonna run
     
     m_romiDriveTrain.setDefaultCommand(m_straightLine);
-    new JoystickButton(PS4joystick, PS4Controller.getSquareButton()).whenPressed(new joystickDriving(m_romiDriveTrain));
+    new JoystickButton(PS4joystick, 1).whenPressed(new joystickDriving(m_romiDriveTrain));
   
 
 

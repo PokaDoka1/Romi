@@ -9,12 +9,15 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.sensor.RomiGyro;
 
 public class RomiDrivetrain extends SubsystemBase {
   //kCountsPerRevolution = relationship between encoder and how far wheel goes
   // 1 spin = how many encoder counts?
   private static final double kCountsPerRevolution = -1440.0;
   private static final double kWheelDiameterInch = 2.75591; // 70 mm
+
+  public static RomiGyro m_gyro = new RomiGyro();
 
   // The Romi has the left and right motors set to
   // PWM channels 0 and 1 respectively
@@ -23,7 +26,7 @@ public class RomiDrivetrain extends SubsystemBase {
 
   // The Romi has onboard encoders that are hardcoded
   // to use DIO pins 4/5 and 6/7 for the left and right
-  private final Encoder m_leftEncoder = new Encoder(4, 5);
+  public final Encoder m_leftEncoder = new Encoder(4, 5);
   private final Encoder m_rightEncoder = new Encoder(6, 7);
 
   // Set up the differential drive controller
