@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.sensor.RomiGyro;
+import frc.robot.commands.autoBackwards;
 
 public class RomiDrivetrain extends SubsystemBase {
   //kCountsPerRevolution = relationship between encoder and how far wheel goes

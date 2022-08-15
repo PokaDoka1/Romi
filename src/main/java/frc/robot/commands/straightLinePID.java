@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.sensor.RomiGyro;
 import frc.robot.Constants.PIDConstants;
 
+
 /** An example command that uses an example subsystem. */
 public class straightLinePID extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
@@ -23,14 +24,10 @@ public class straightLinePID extends CommandBase {
    * @param subsystem The subsystem used by this command.
    */
   public straightLinePID(RomiDrivetrain subsystem) {
-    double m_turnRate;
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
 
-    public double getTurnRate() {
-      return m_turnRate;
-    }
 
     
   }
@@ -53,7 +50,7 @@ public class straightLinePID extends CommandBase {
     SmartDashboard.putNumber("gyro data", RobotContainer.m_romiDriveTrain.m_gyro.getAngle());
 
     PIDController m_pid = new PIDController(PIDConstants.P_DRIVE, PIDConstants.I_DRIVE, PIDConstants.D_DRIVE);
-    m_subsystem.m_diffDrive.arcadeDrive(0.5, m_pid.calculate(-getTurnRate(),0) ;
+    m_subsystem.m_diffDrive.arcadeDrive(0.5, m_pid.calculate(m_subsystem.m_gyro.getAngleZ(),0)) ;
 
 
 

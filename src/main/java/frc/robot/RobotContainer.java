@@ -12,11 +12,13 @@ import frc.robot.commands.Forward;
 import frc.robot.commands.Turn;
 import frc.robot.commands.joystickDriving;
 import frc.robot.commands.straightLine;
+import frc.robot.commands.straightLinePID;
 import frc.robot.sensor.RomiGyro;
 import frc.robot.subsystems.RomiDrivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
+import frc.robot.commands.autoBackwards;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -32,6 +34,7 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDriveTrain);
   private final joystickDriving m_joystickDriving = new joystickDriving(m_romiDriveTrain);
   private final straightLine m_straightLine = new straightLine(m_romiDriveTrain);
+  //public final autoBackwards m_autoBackwards = new autoBackwards(m_romiDriveTrain);
 
   public static PS4Controller PS4joystick = new PS4Controller(0);
   
@@ -60,10 +63,12 @@ public class RobotContainer {
     
     //when in teleop, the m_joystickDriving is gonna run
     
-    m_romiDriveTrain.setDefaultCommand(m_straightLine);
+
     new JoystickButton(PS4joystick, 1).whenPressed(new joystickDriving(m_romiDriveTrain));
   
-
+    new JoystickButton(PS4joystick, 2).whenPressed(new straightLine(m_romiDriveTrain));
+    
+    new JoystickButton(PS4joystick, 3).whenPressed(new straightLinePID(m_romiDriveTrain));
 
 
   
@@ -79,6 +84,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return new Forward(6);
   }
 }
