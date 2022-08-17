@@ -1,4 +1,13 @@
 {
+  "HALProvider": {
+    "Other Devices": {
+      "RomiGyro": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
@@ -8,6 +17,23 @@
       "/SmartDashboard/forward": "Command",
       "/SmartDashboard/turn -90": "Command",
       "/SmartDashboard/turn 90": "Command"
+    },
+    "windows": {
+      "/SmartDashboard/forward": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/turn -90": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/turn 90": {
+        "window": {
+          "visible": true
+        }
+      }
     }
   },
   "NetworkTables": {
