@@ -36,7 +36,7 @@ public class autoBackwards extends CommandBase {
   public void execute() {
     //first argument forward
     //second argument turn
-    RobotContainer.m_romiDriveTrain.arcadeDrive(-0.15,0);
+    RobotContainer.m_romiDriveTrain.arcadeDrive(-0.5,0);
   }
 
   // Called once the command ends or is interrupted.

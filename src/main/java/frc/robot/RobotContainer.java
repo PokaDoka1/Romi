@@ -71,6 +71,9 @@ public class RobotContainer {
     new JoystickButton(PS4joystick, 3).whenPressed(new straightLinePID(m_romiDriveTrain));
 
 
+    new JoystickButton(PS4joystick, 4).whenPressed(new Turn(90));
+
+
   
     
 
@@ -84,6 +87,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new Forward(6);
+    return new autoBackwards(6);
   }
 }
