@@ -14,7 +14,6 @@ public class Forward extends CommandBase {
 
   private double distance;
 
-
   /** Creates a new Forward. */
   public Forward(double inches) {
     
@@ -47,7 +46,6 @@ public class Forward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
     return RobotContainer.m_romiDriveTrain.getLeftDistanceInch() >= distance ;
   }
 }
