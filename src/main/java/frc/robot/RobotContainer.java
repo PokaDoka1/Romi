@@ -38,14 +38,10 @@ public class RobotContainer {
 
   public static PS4Controller PS4joystick = new PS4Controller(0);
   
-
   
-
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
-
-
     configureButtonBindings();
   }
 
@@ -59,11 +55,8 @@ public class RobotContainer {
     SmartDashboard.putData("forward", new Forward(6));
     SmartDashboard.putData("turn 90", new Turn(90));
     SmartDashboard.putData("turn -90", new Turn(-90));
-
     
     //when in teleop, the m_joystickDriving is gonna run
-    
-
     new JoystickButton(PS4joystick, 1).whenPressed(new joystickDriving(m_romiDriveTrain));
   
     new JoystickButton(PS4joystick, 2).whenPressed(new straightLine(m_romiDriveTrain));
@@ -73,11 +66,6 @@ public class RobotContainer {
 
     new JoystickButton(PS4joystick, 4).whenPressed(new Turn(90));
 
-
-  
-    
-
-    //hi amigos
   }
 
   /**
