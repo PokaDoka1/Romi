@@ -16,18 +16,18 @@ import frc.robot.Constants.PIDConstants;
 /** An example command that uses an example subsystem. */
 public class straightLinePID extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final RomiDrivetrain m_subsystem;
+  private final RomiDrivetrain m_db;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public straightLinePID(RomiDrivetrain subsystem) {
-    m_subsystem = subsystem;
+  public straightLinePID(RomiDrivetrain db) {
+    double m_turnRate;
+    m_db = db;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
-
+    addRequirements(m_db);
 
     
   }
@@ -35,7 +35,7 @@ public class straightLinePID extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_romiDriveTrain.resetEncoders();
+    m_db.resetEncoders();
 
     
 
@@ -44,16 +44,13 @@ public class straightLinePID extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double m_leftEncoderData = RobotContainer.m_romiDriveTrain.m_leftEncoder.getRaw();
-    double m_rightEncoderData = RobotContainer.m_romiDriveTrain.m_leftEncoder.getRaw();
+    double m_leftEncoderData = m_db.m_leftEncoder.getRaw();
+    double m_rightEncoderData =m_db.m_leftEncoder.getRaw();
 
-    SmartDashboard.putNumber("gyro data", RobotContainer.m_romiDriveTrain.m_gyro.getAngle());
+    SmartDashboard.putNumber("gyro data", m_db.m_gyro.getAngle());
 
     PIDController m_pid = new PIDController(PIDConstants.P_DRIVE, PIDConstants.I_DRIVE, PIDConstants.D_DRIVE);
-    m_subsystem.m_diffDrive.arcadeDrive(0.5, m_pid.calculate(m_subsystem.m_gyro.getAngleZ(),0)) ;
-
-
-
+    m_db.m_diffDrive.arcadeDrive(0.5, m_pid.calculate(-getTurnRate(),0) ;
   }
 
   // Called once the command ends or is interrupted.
