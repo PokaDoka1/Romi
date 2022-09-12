@@ -12,41 +12,35 @@ import frc.robot.sensor.RomiGyro;
 /** An example command that uses an example subsystem. */
 public class straightLine extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final RomiDrivetrain m_subsystem;
+  private final RomiDrivetrain m_db;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public straightLine(RomiDrivetrain subsystem) {
-    m_subsystem = subsystem;
+  public straightLine(RomiDrivetrain db) {
+    m_db = db;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(m_db);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_romiDriveTrain.resetEncoders();
-
-    
-
+    m_db.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double m_leftEncoderData = RobotContainer.m_romiDriveTrain.m_leftEncoder.getRaw();
-    double m_rightEncoderData = RobotContainer.m_romiDriveTrain.m_leftEncoder.getRaw();
+    double m_leftEncoderData = m_db.m_leftEncoder.getRaw();
+    double m_rightEncoderData = m_db.m_leftEncoder.getRaw();
 
-    SmartDashboard.putNumber("gyro data", RobotContainer.m_romiDriveTrain.m_gyro.getAngle());
+    SmartDashboard.putNumber("gyro data", m_db.m_gyro.getAngle());
 
     double REDUCTION = 0.015;
-    m_subsystem.m_diffDrive.arcadeDrive(0.5, -m_subsystem.m_gyro.getAngleZ() * REDUCTION);
-
-
-
+    m_db.m_diffDrive.arcadeDrive(0.5, -m_db.m_gyro.getAngleZ() * REDUCTION);
   }
 
   // Called once the command ends or is interrupted.
