@@ -34,7 +34,6 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDriveTrain);
   private final joystickDriving m_joystickDriving = new joystickDriving(m_romiDriveTrain);
   private final straightLine m_straightLine = new straightLine(m_romiDriveTrain);
-  //public final autoBackwards m_autoBackwards = new autoBackwards(m_romiDriveTrain);
 
   public static PS4Controller PS4joystick = new PS4Controller(0);
   
@@ -52,19 +51,19 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    SmartDashboard.putData("forward", new Forward(6));
-    SmartDashboard.putData("turn 90", new Turn(90));
-    SmartDashboard.putData("turn -90", new Turn(-90));
+    SmartDashboard.putData("forward", new Forward(m_romiDriveTrain, 6));
+    SmartDashboard.putData("turn 90", new Turn(m_romiDriveTrain, 90));
+    SmartDashboard.putData("turn -90", new Turn(m_romiDriveTrain, -90));
+    SmartDashboard.putData("straightLinePID", m_straightLine);
+
     
     //when in teleop, the m_joystickDriving is gonna run
-    new JoystickButton(PS4joystick, 1).whenPressed(new joystickDriving(m_romiDriveTrain));
   
-    new JoystickButton(PS4joystick, 2).whenPressed(new straightLine(m_romiDriveTrain));
+    new JoystickButton(PS4joystick, 2).whenPressed(m_joystickDriving);
     
-    new JoystickButton(PS4joystick, 3).whenPressed(new straightLinePID(m_romiDriveTrain));
+    new JoystickButton(PS4joystick, 3).whenPressed(m_straightLine);
 
-
-    new JoystickButton(PS4joystick, 4).whenPressed(new Turn(90));
+    new JoystickButton(PS4joystick, 4).whenPressed(new Turn(m_romiDriveTrain, 90));
 
   }
 
@@ -75,6 +74,8 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
+    return new Turn(m_romiDriveTrain, 90);
+
     return new autoBackwards(6);
   }
 }
