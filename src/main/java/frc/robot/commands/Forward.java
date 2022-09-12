@@ -5,27 +5,25 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
-
-
+import frc.robot.subsystems.RomiDrivetrain;
 
 public class Forward extends CommandBase {
 
   private double distance;
+  private final RomiDrivetrain m_db;
 
   /** Creates a new Forward. */
-  public Forward(double inches) {
-    
+  public Forward(RomiDrivetrain db, double inches) {
+    m_db = db;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_romiDriveTrain);
+    addRequirements(m_db);
     distance = inches;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_romiDriveTrain.resetEncoders();
+    m_db.resetEncoders();
   }
 
 
@@ -34,18 +32,19 @@ public class Forward extends CommandBase {
   public void execute() {
     //first argument forward
     //second argument turn
-    RobotContainer.m_romiDriveTrain.arcadeDrive(0.5,0);
+    m_db.arcadeDrive(0.5,0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_romiDriveTrain.arcadeDrive(0,0);
+    m_db.arcadeDrive(0,0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return RobotContainer.m_romiDriveTrain.getLeftDistanceInch() >= distance ;
+
+    return m_db.getLeftDistanceInch() >= distance ;
   }
 }
