@@ -12,15 +12,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /** An example command that uses an example subsystem. */
 public class joystickDriving extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final RomiDrivetrain m_subsystem;
-
+  private final RomiDrivetrain m_db;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public joystickDriving(RomiDrivetrain subsystem) {
-    m_subsystem = subsystem;
+  public joystickDriving(RomiDrivetrain db) {
+    m_db = db;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_romiDriveTrain);
     }
@@ -33,7 +32,7 @@ public class joystickDriving extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.m_diffDrive.arcadeDrive(RobotContainer.PS4joystick.getRawAxis(1), RobotContainer.PS4joystick.getRawAxis(2));
+    m_db.m_diffDrive.arcadeDrive(RobotContainer.PS4joystick.getRawAxis(1), RobotContainer.PS4joystick.getRawAxis(2));
   }
 
   // Called once the command ends or is interrupted.
