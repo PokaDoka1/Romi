@@ -23,6 +23,7 @@ public class Forward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_db.arcadeDrive(0,0);
     m_db.resetEncoders();
   }
 
@@ -33,6 +34,7 @@ public class Forward extends CommandBase {
     //first argument forward
     //second argument turn
     m_db.arcadeDrive(0.5,0);
+    System.out.println(m_db.getLeftDistanceInch());
   }
 
   // Called once the command ends or is interrupted.
@@ -45,6 +47,6 @@ public class Forward extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    return m_db.getLeftDistanceInch() >= distance ;
+    return Math.abs(m_db.getAverageDistanceInch()) >= distance ;
   }
 }

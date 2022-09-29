@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
 import frc.robot.commands.autoBackwards;
+import frc.robot.commands.straightLinePID2;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -34,6 +35,8 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDriveTrain);
   private final joystickDriving m_joystickDriving = new joystickDriving(m_romiDriveTrain);
   private final straightLine m_straightLine = new straightLine(m_romiDriveTrain);
+  private final straightLinePID m_straightLinePID = new straightLinePID(m_romiDriveTrain);
+  private final straightLinePID2 m_straightLinePID2 = new straightLinePID2(m_romiDriveTrain);
 
   public static PS4Controller PS4joystick = new PS4Controller(0);
   
@@ -54,16 +57,19 @@ public class RobotContainer {
     SmartDashboard.putData("forward", new Forward(m_romiDriveTrain, 6));
     SmartDashboard.putData("turn 90", new Turn(m_romiDriveTrain, 90));
     SmartDashboard.putData("turn -90", new Turn(m_romiDriveTrain, -90));
-    SmartDashboard.putData("straightLinePID", m_straightLine);
+    SmartDashboard.putData("straightLinePID", m_straightLinePID);
 
     
     //when in teleop, the m_joystickDriving is gonna run
   
-    new JoystickButton(PS4joystick, 2).whenPressed(m_joystickDriving);
+    //x button
+    new JoystickButton(PS4joystick, 4).whenPressed(m_joystickDriving);
     
-    new JoystickButton(PS4joystick, 3).whenPressed(m_straightLine);
+    //new JoystickButton(PS4joystick, 3).whenPressed(m_straightLine);
 
-    new JoystickButton(PS4joystick, 4).whenPressed(new Turn(m_romiDriveTrain, 90));
+    new JoystickButton(PS4joystick, 3).whenPressed(m_straightLinePID2);
+
+    //new JoystickButton(PS4joystick, 4).whenPressed(new Turn(m_romiDriveTrain, 90));
 
   }
 
@@ -75,7 +81,5 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return new Turn(m_romiDriveTrain, 90);
-
-    return new autoBackwards(6);
   }
 }

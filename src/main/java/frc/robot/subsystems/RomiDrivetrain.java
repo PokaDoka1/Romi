@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,20 +16,20 @@ import frc.robot.commands.autoBackwards;
 public class RomiDrivetrain extends SubsystemBase {
   //kCountsPerRevolution = relationship between encoder and how far wheel goes
   // 1 spin = how many encoder counts?
-  private static final double kCountsPerRevolution = -1440.0;
-  private static final double kWheelDiameterInch = 2.75591; // 70 mm
+  public static final double kCountsPerRevolution = -1440.0;
+  public static final double kWheelDiameterInch = 2.75591; // 70 mm
 
   public static RomiGyro m_gyro = new RomiGyro();
 
   // The Romi has the left and right motors set to
   // PWM channels 0 and 1 respectively
-  private final Spark m_leftMotor = new Spark(0);
-  private final Spark m_rightMotor = new Spark(1);
+  public final Spark m_leftMotor = new Spark(0);
+  public final Spark m_rightMotor = new Spark(1);
 
   // The Romi has onboard encoders that are hardcoded
   // to use DIO pins 4/5 and 6/7 for the left and right
-  public final Encoder m_leftEncoder = new Encoder(4, 5);
-  private final Encoder m_rightEncoder = new Encoder(6, 7);
+  public final Encoder m_leftEncoder = new Encoder(4, 5, false);
+  private final Encoder m_rightEncoder = new Encoder(6, 7, false);
 
   // Set up the differential drive controller
   public final DifferentialDrive m_diffDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
@@ -63,6 +64,10 @@ public class RomiDrivetrain extends SubsystemBase {
 
   public double getRightDistanceInch() {
     return m_rightEncoder.getDistance();
+  }
+
+  public double getAverageDistanceInch(){
+    return(getLeftDistanceInch() + getRightDistanceInch()) / 2.0;
   }
 
   @Override
